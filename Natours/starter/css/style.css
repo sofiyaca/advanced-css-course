@@ -6,3 +6,213 @@ Medium green: #55c57a
 Dark green: #28b485
 
 */
+/* global reset */
+*, 
+*::before, 
+*::after {
+  margin: 0;
+  padding: 0;
+  /* box-sizing: border-box; */
+  box-sizing: inherit;
+}
+
+html {
+  /* bad practice to set this to pixels here because the user can't change the font size */
+  /* font-size: 10px; */
+  font-size: 62.5%;
+}
+
+body {
+/* global font family, most efficient to add here because of inheritance */
+  font-family: 'Lato', sans-serif; 
+  font-weight: 400;
+  /* font-size: 16px; */
+  line-height: 1.7;
+  color: #777;
+  padding: 3rem;
+  box-sizing: border-box;
+}
+
+.header {
+  height: 95vh;
+  background-image: 
+    linear-gradient(to right bottom, rgba(126, 213, 111, 0.801), rgba(40, 180, 133, 0.801)),
+    url(../img/hero.jpg);
+  background-size: cover;
+
+  /* decides which part of the image will be croped as it resizes */
+  background-position: top;
+  position: relative;
+
+  /* this creates the clipped bottom of the hero */
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+}
+
+.header__logo-box {
+  /* have to add position: relative on the parent, which is the header */
+  position: absolute;
+  top: 4rem;
+  left: 4rem;
+}
+
+.header__logo {
+  height: 3.5rem;
+}
+
+.header__text-box {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* use this to center the button link, which is an inline-block */
+  text-align: center;
+}
+
+.heading-primary {
+  color: #ffffff;
+  text-transform: uppercase;
+  margin-bottom: 6rem;
+
+  /* determines if the back part of the element is hidden */
+  /* fixes the shaking up and down in the animation */
+  backface-visibility: hidden;
+}
+
+.heading-primary--main {
+  display: block;
+  font-size: 6rem;
+  font-weight: 400;
+  letter-spacing: 3.5rem;
+
+  animation-name: moveInLeft;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+
+  /* animation-iteration-count: 3;
+  animation-delay: 3s; */
+}
+
+.heading-primary--sub {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1.75rem;
+
+  /* animation is short for the animation-name, animation-duration & timing function */
+  animation: moveInRight 1s ease-out;
+  
+  /* animation-name: moveInRight;
+  animation-duration: 1s;
+  animation-timing-function: ease-out; */
+}
+
+@keyframes moveInLeft {
+  /* for browser performace it's best to animate only two properties at a time */
+  /* like opacity and transform */
+  0% {
+    opacity: 0;
+    transform: translateX(-10rem);
+  }
+
+  80% {
+    transform: translateX(1rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+@keyframes moveInRight {
+  /* for browser performace it's best to animate only two properties at a time */
+  /* like opacity and transform */
+  0% {
+    opacity: 0;
+    transform: translateX(10rem);
+  }
+
+  80% {
+    transform: translateX(-1rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+@keyframes moveInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+.btn:link,
+.btn:visited {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 1.5rem 4rem;
+  display: inline-block;
+  border-radius: 10rem;
+  transition: all .2s;
+  position: relative;
+  font-size: 1.6rem;
+}
+
+.btn:hover {
+  /* when you hover, pop up out of the page */
+  transform: translateY(-3px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+  /* when you click, go down into the page  */
+  transform: translateY(-1px);
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+.btn--white {
+  background-color: #fff;
+  color: #777;
+}
+
+.btn::after {
+  /* have to always give a content even if empty */
+  /* treated as a child element of the btn-white */
+  content: '';
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  border-radius: 10rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* makes sure that the after pseudo button is behind the 'real' button */
+  z-index: -1;
+  transition: all 0.4s;
+}
+
+.btn-white::after {
+  background-color: #fff;
+}
+
+.btn:hover::after {
+  /* this makes the white jumping out effect by making the 
+  after pseudo button bigger in the X and Y dimentions  */
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
+
+.btn--animated {
+  animation: moveInBottom 0.5s ease-out 0.75s;
+
+  /* this will automatically apply the keyframe 0% to the button */
+  animation-fill-mode: backwards;
+}

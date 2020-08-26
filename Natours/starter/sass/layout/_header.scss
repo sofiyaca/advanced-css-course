@@ -1,0 +1,35 @@
+
+.header {
+  height: 95vh;
+  background-image: 
+    linear-gradient(to right bottom, rgba($color-primary-light, 0.801), rgba($color-primary-dark, 0.801)),
+    url(../img/hero.jpg);
+  background-size: cover;
+
+  /* decides which part of the image will be croped as it resizes */
+  background-position: top;
+  position: relative;
+
+  /* this creates the clipped bottom of the hero */
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+
+  &__logo-box {
+  /* have to add position: relative on the parent, which is the header */
+  position: absolute;
+  top: 4rem;
+  left: 4rem;
+  }
+
+  &__logo {
+  height: 3.5rem;
+  }
+
+  &__text-box {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* use this to center the button link, which is an inline-block */
+    text-align: center;
+  }
+}

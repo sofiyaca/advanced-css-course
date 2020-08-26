@@ -1,0 +1,21 @@
+
+/* global reset */
+*, 
+*::before, 
+*::after {
+  margin: 0;
+  padding: 0;
+  /* box-sizing: border-box; */
+  box-sizing: inherit;
+}
+
+html {
+  /* bad practice to set this to pixels here because the user can't change the font size */
+  /* font-size: 10px; */
+  // define what one rem is
+  font-size: 62.5%;
+}
+
+body {
+  box-sizing: border-box;
+}

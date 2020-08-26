@@ -1,0 +1,65 @@
+
+.btn {
+  &:link,
+  &:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    display: inline-block;
+    border-radius: 10rem;
+    transition: all .2s;
+    position: relative;
+    font-size: 1.6rem;
+  }
+  
+  &:hover {
+    /* when you hover, pop up out of the page */
+    transform: translateY(-3px);
+    box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
+
+    &::after {
+      /* this makes the white jumping out effect by making the 
+      after pseudo button bigger in the X and Y dimentions  */
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0;
+    }
+  }
+  
+  &:active {
+    /* when you click, go down into the page  */
+    transform: translateY(-1px);
+    box-shadow: 0 .5rem 1rem rgba($color-black, 0.2);
+  }
+  
+  &--white {
+    background-color: $color-white;
+    color: $color-grey-dark;
+
+    &::after {
+      background-color: $color-white;
+    }
+  }
+  
+  &::after {
+    /* have to always give a content even if empty */
+    /* treated as a child element of the btn-white */
+    content: '';
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* makes sure that the after pseudo button is behind the 'real' button */
+    z-index: -1;
+    transition: all 0.4s;
+  }
+  
+  &--animated {
+    animation: moveInBottom 0.5s ease-out 0.75s;
+  
+    /* this will automatically apply the keyframe 0% to the button */
+    animation-fill-mode: backwards;
+  }
+}
